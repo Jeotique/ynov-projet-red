@@ -3,32 +3,60 @@ package values
 import "game/utils"
 
 type Pokemon struct {
-	nom           string
-	classe        string
-	description   string
-	vie           int
-	maxVie        int
-	chanceCapture int
-	attaques      []Attaque
+	Nom           string    `json:"Nom"`
+	Classe        string    `json:"Classe"`
+	Description   string    `json:"Description"`
+	Vie           int       `json:"Vie"`
+	MaxVie        int       `json:"MaxVie"`
+	ChanceCapture int       `json:"ChanceCapture"`
+	Attaques      []Attaque `json:"Attaques"`
 }
 
 type Attaque struct {
-	nom         string
-	description string
-	classe      string
-	degatMin    int
-	degatMax    int
-	prixVie     int
+	Nom         string `json:"Nom"`
+	Description string `json:"Description"`
+	Classe      string `json:"Classe"`
+	DegatMin    int    `json:"DegatMin"`
+	DegatMax    int    `json:"DegatMax"`
+	PrixVie     int    `json:"PrixVie"`
 }
 
 func (p Pokemon) GetName() string {
-	return p.nom
+	return p.Nom
+}
+
+func (p Pokemon) GetClass() string {
+	return p.Classe
+}
+
+func (p Pokemon) GetDescription() string {
+	return p.Description
+}
+
+func (p Pokemon) GetLife() int {
+	return p.Vie
+}
+
+func (p Pokemon) GetMaxLife() int {
+	return p.MaxVie
+}
+
+func (p Pokemon) GetCaptureChance() int {
+	return p.ChanceCapture
+}
+
+func (p Pokemon) GetAttacks() []Attaque {
+	return p.Attaques
+}
+
+func (p *Pokemon) Heal() {
+	p.Vie = p.MaxVie
 }
 
 func FindPokemon(nom string) Pokemon {
 	var Result Pokemon
 	for _, M := range Pokemons {
-		if M.nom == nom {
+		if M.Nom == nom {
 			Result = M
 		}
 	}

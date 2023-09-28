@@ -3,8 +3,12 @@ package bdd
 import (
 	"encoding/json"
 	"fmt"
+	"game/values"
 	"io/ioutil"
+	"strings"
 )
+
+var Database *QuickDB
 
 type QuickDB struct {
 	filePath string
@@ -60,4 +64,72 @@ func (db *QuickDB) Delete(key string) {
 
 func (db *QuickDB) GetAll() map[string]interface{} {
 	return db.data
+}
+
+func (db *QuickDB) AddPokemon(name string) {
+	if db.Get("owned_pokemon") != nil {
+		old := db.Get("owned_pokemon").(string)
+		db.Set("owned_pokemon", old+"_"+name)
+	} else {
+		db.Set("owned_pokemon", name)
+	}
+	db.SavePokemons(values.MainCharacter.Pokemons)
+}
+
+func (db *QuickDB) RemovePokemon(name string) {
+	if db.Get("owned_pokemon") != nil {
+		old := db.Get("owned_pokemon").(string)
+		old = strings.Replace(old, name, "", -1)
+		db.Set("owned_pokemon", old)
+	}
+	db.SavePokemons(values.MainCharacter.Pokemons)
+}
+
+func (db *QuickDB) GetPokemon() []string {
+	if db.Get("owned_pokemon") != nil {
+		all := db.Get("owned_pokemon").(string)
+		splitted := strings.Split(all, "_")
+		var result []string
+		for _, c := range splitted {
+			if c != "" {
+				result = append(result, c)
+			} else {
+				continue
+			}
+		}
+		return result
+	} else {
+		return []string{}
+	}
+}
+
+func (db *QuickDB) SavePokemons(pokemons []values.Pokemon) error {
+	pokemonsJSON, err := json.Marshal(pokemons)
+	if err != nil {
+		return err
+	}
+	err = ioutil.WriteFile("pokemons.json", pokemonsJSON, 0644)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (db *QuickDB) LoadPokemons() error {
+	jsonData, err := ioutil.ReadFile("pokemons.json")
+	if err != nil {
+		return err
+	}
+
+	var pokemons []values.Pokemon
+
+	err = json.Unmarshal(jsonData, &pokemons)
+	if err != nil {
+		return err
+	}
+
+	values.MainCharacter.Pokemons = pokemons
+
+	return nil
 }

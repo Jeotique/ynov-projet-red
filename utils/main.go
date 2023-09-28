@@ -3,6 +3,9 @@ package utils
 import (
 	"bufio"
 	"fmt"
+	"github.com/faiface/beep"
+	"github.com/faiface/beep/mp3"
+	"github.com/faiface/beep/speaker"
 	"github.com/mattn/go-tty"
 	"log"
 	"math/rand"
@@ -114,4 +117,31 @@ func IsNumeric(s string) bool {
 		}
 	}
 	return true
+}
+
+func PlaySound(path string, rate ...int) {
+	f, err := os.Open(path)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if len(rate) < 1 {
+		rate = []int{3}
+	}
+
+	streamer, format, err := mp3.Decode(f)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer streamer.Close()
+
+	//speaker.Init(format.SampleRate, format.SampleRate.N(time.Second/10))
+	speaker.Init(format.SampleRate*beep.SampleRate(rate[0]), format.SampleRate.N(time.Second/10))
+
+	done := make(chan bool)
+	speaker.Play(beep.Seq(streamer, beep.Callback(func() {
+		done <- true
+	})))
+
+	<-done
 }
