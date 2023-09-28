@@ -133,3 +133,34 @@ func (db *QuickDB) LoadPokemons() error {
 
 	return nil
 }
+
+func (db *QuickDB) SaveBadges(badges []values.Badge) error {
+	pokemonsJSON, err := json.Marshal(badges)
+	if err != nil {
+		return err
+	}
+	err = ioutil.WriteFile("badges.json", pokemonsJSON, 0644)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (db *QuickDB) LoadBadges() error {
+	jsonData, err := ioutil.ReadFile("badges.json")
+	if err != nil {
+		return err
+	}
+
+	var badges []values.Badge
+
+	err = json.Unmarshal(jsonData, &badges)
+	if err != nil {
+		return err
+	}
+
+	values.MainCharacter.Badges = badges
+
+	return nil
+}

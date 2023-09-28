@@ -6,12 +6,15 @@ import (
 	"game/graphic"
 	"game/utils"
 	"game/values"
+	"github.com/briandowns/spinner"
 	"github.com/mattn/go-tty"
 	"log"
 	"os"
+	"time"
 )
 
 func main() {
+	utils.ClearTerminal()
 	bdd.Database = bdd.NewQuickDB("database.json")
 	if bdd.Database.Get("pokemon_selected") != nil && bdd.Database.Get("pokemon_selected").(bool) {
 		values.CurrentPage = "menu"
@@ -21,6 +24,7 @@ func main() {
 			values.MainCharacter.Nom = SavedCharacterName.(string)
 		}
 		bdd.Database.LoadPokemons()
+		bdd.Database.LoadBadges()
 		if bdd.Database.Get("character_pokemax") != nil {
 			values.MainCharacter.PokemonMax = int(bdd.Database.Get("character_pokemax").(float64))
 		}
@@ -39,8 +43,25 @@ func main() {
 		if bdd.Database.Get("character_pierrenuit") != nil {
 			values.MainCharacter.PierreNuit = int(bdd.Database.Get("character_pierrenuit").(float64))
 		}
+		if bdd.Database.Get("character_xp") != nil {
+			values.MainCharacter.Xp = int(bdd.Database.Get("character_xp").(float64))
+		}
+		if bdd.Database.Get("character_level") != nil {
+			values.MainCharacter.Level = int(bdd.Database.Get("character_level").(float64))
+		}
 		StartListening()
 	} else {
+
+		utils.Writeanim("                                  ,'\\\n    _.----.        ____         ,'  _\\   ___    ___     ____\n_,-'       `.     |    |  /`.   \\,-'    |   \\  /   |   |    \\  |`.\n\\      __    \\    '-.  | /   `.  ___    |    \\/    |   '-.   \\ |  |\n \\.    \\ \\   |  __  |  |/    ,','_  `.  |          | __  |    \\|  |\n   \\    \\/   /,' _`.|      ,' / / / /   |          ,' _`.|     |  |\n    \\     ,-'/  /   \\    ,'   | \\/ / ,`.|         /  /   \\  |     |\n     \\    \\ |   \\_/  |   `-.  \\    `'  /|  |    ||   \\_/  | |\\    |\n      \\    \\ \\      /       `-.`.___,-' |  |\\  /| \\      /  | |   |\n       \\    \\ `.__,'|  |`-._    `|      |__| \\/ |  `.__,'|  | |   |\n        \\_.-'       |__|    `-._ |              '-.|     '-.| |   |\n                                `'                            '-._|", 2)
+		fmt.Println()
+		s := spinner.New(spinner.CharSets[38], 100*time.Millisecond)
+		s.FinalMSG = "Game loaded !\n"
+		s.Color("bold")
+		s.Start()
+		time.Sleep(6000 * time.Millisecond)
+		fmt.Println()
+		s.Stop()
+
 		graphic.SelectPokemon()
 		go playMusic()
 		fmt.Println("Séléctionnez votre pokémon de départ :")
@@ -99,6 +120,7 @@ func ChoseUrName() {
 	bdd.Database.Set("character_name", input)
 	bdd.Database.Set("character_pokemax", values.MainCharacter.PokemonMax)
 	bdd.Database.Set("character_argent", values.MainCharacter.Argent)
+	bdd.Database.SaveBadges(values.MainCharacter.Badges)
 	utils.ClearTerminal()
 	utils.Writeanim("Bienvenue, "+input, 10)
 	utils.Writeanim("\nHeureux de partir à l'aventure avec vous !", 5)
@@ -126,7 +148,7 @@ func StartListening() {
 			var funcType func()
 			switch values.CurrentPage {
 			case "menu":
-				maxIndex = 4
+				maxIndex = 5
 				funcType = graphic.UpdateMenu
 				break
 			case "bag":
@@ -143,12 +165,58 @@ func StartListening() {
 				break
 			case "pokemon_info":
 				if values.MainCharacter.PotionVie < 1 {
-					maxIndex = 2
-				} else {
 					maxIndex = 3
+				} else {
+					maxIndex = 4
 				}
 				funcType = graphic.DisplayPokemonInfo
 				break
+			case "attacks":
+				maxIndex = len(values.PokemonInfo.GetAttacks()) + 1
+				funcType = graphic.UpdatePokemonAttacks
+				break
+			case "upgrade":
+				maxIndex = 2
+				funcType = graphic.AskForUpgrade
+				break
+			case "balade":
+				maxIndex = 3
+				funcType = graphic.UpdateBalade
+				break
+			case "balade_pokemon":
+				maxIndex = len(values.MainCharacter.Pokemons) + 1
+				funcType = graphic.SelectPokemonBalade
+				break
+			case "in_battle":
+				if values.MainCharacter.PotionPoison < 1 {
+					maxIndex = len(values.PokemonBalade.GetAttacks()) + 1
+				} else {
+					maxIndex = len(values.PokemonBalade.GetAttacks()) + 2
+				}
+				funcType = graphic.BattleBalade
+				break
+			case "select_arene":
+				maxIndex = len(values.Maitres) + 1
+				funcType = graphic.SelectArene
+				break
+			case "select_arene_pokemon":
+				maxIndex = len(values.MainCharacter.Pokemons) + 1
+				funcType = graphic.SelectPokemonArene
+				break
+			case "in_battle_arene":
+				if values.MainCharacter.PotionPoison < 1 {
+					maxIndex = len(values.PokemonBalade.GetAttacks())
+				} else {
+					maxIndex = len(values.PokemonBalade.GetAttacks()) + 1
+				}
+				funcType = graphic.BattleArene
+				break
+			case "badge":
+				maxIndex = len(values.MainCharacter.Badges) + 1
+				funcType = graphic.UpdateBadge
+				break
+			default:
+				continue
 			}
 			if r == 65 {
 				if values.MenuIndex == 1 {
@@ -164,10 +232,14 @@ func StartListening() {
 				}
 			}
 			funcType()
-			go utils.PlaySound(values.Sounds["navigate"])
+			if values.CurrentPage != "in_battle" && values.CurrentPage != "in_battle_arene" {
+				go utils.PlaySound(values.Sounds["navigate"])
+			}
 		} else {
 			if r == 13 { // 13 = touche entrée
-				go utils.PlaySound(values.Sounds["click"])
+				if values.CurrentPage != "in_battle" && values.CurrentPage != "in_battle_arene" {
+					go utils.PlaySound(values.Sounds["click"])
+				}
 				switch values.CurrentPage {
 				case "menu":
 					graphic.ActionMenuu()
@@ -188,6 +260,35 @@ func StartListening() {
 				case "shop":
 					graphic.ActionShop()
 					break
+				case "attacks":
+					graphic.ActionPokemonAttacks()
+					break
+				case "upgrade":
+					graphic.ActionAskUpgrade()
+					break
+				case "balade":
+					graphic.ActionBalade()
+					break
+				case "balade_pokemon":
+					graphic.ConfirmSelectBalade()
+					break
+				case "in_battle":
+					graphic.ActionBattle()
+					break
+				case "select_arene":
+					graphic.ActionSelectArene()
+					break
+				case "select_arene_pokemon":
+					graphic.ConfirmSelectArene()
+					break
+				case "in_battle_arene":
+					graphic.ActionArene()
+					break
+				case "badge":
+					graphic.ActionBadge()
+					break
+				default:
+					continue
 				}
 			}
 		}

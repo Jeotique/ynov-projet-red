@@ -66,3 +66,23 @@ func FindPokemon(nom string) Pokemon {
 func GetRandomPokemon() Pokemon {
 	return Pokemons[utils.RandomNumber(0, len(Pokemons)-1)]
 }
+
+func IsCounter(poke1 string, poke2 string) bool {
+	if poke1 == poke2 {
+		return false
+	} else if poke1 == "Psychique" && poke2 == "Psychique" {
+		return true
+	} else if poke1 == "Feu" && poke2 == "Eau" {
+		return true
+	} else if poke1 == "Eau" && poke2 == "Normal" {
+		return true
+	} else if poke1 == "Plante" && poke2 == "Feu" {
+		return true
+	} else if poke1 == "Eau" && poke2 == "Plante" {
+		return true
+	} else if poke1 != "Psychique" && poke2 == "Psychique " {
+		return true
+	} else {
+		return false
+	}
+}

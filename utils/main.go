@@ -88,7 +88,6 @@ func WaitForInput() string {
 }
 
 func RandomNumber(min int, max int) int {
-	rand.Seed(time.Now().UnixNano())
 	return rand.Intn((max - min + 1) + min)
 }
 
@@ -126,7 +125,7 @@ func PlaySound(path string, rate ...int) {
 	}
 
 	if len(rate) < 1 {
-		rate = []int{3}
+		rate = []int{1}
 	}
 
 	streamer, format, err := mp3.Decode(f)
