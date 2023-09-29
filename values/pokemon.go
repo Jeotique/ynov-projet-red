@@ -83,6 +83,14 @@ func IsCounter(poke1 string, poke2 string) bool {
 		return true
 	} else if poke1 != "Psychique" && poke2 == "Psychique " {
 		return true
+	} else if poke1 == "Normal" && poke2 == "Vol" {
+		return true
+	} else if poke1 == "Électrique" && poke2 == "Roche" {
+		return true
+	} else if poke1 == "Roche" && poke2 == "Feu" {
+		return true
+	} else if poke1 == "Roche" && poke2 == "Eau" {
+		return true
 	} else {
 		return false
 	}
