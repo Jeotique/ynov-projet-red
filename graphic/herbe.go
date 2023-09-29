@@ -384,8 +384,9 @@ func BaladeLoser() {
 func BaladeCaptured() {
 	values.MenuIndex = 1
 	values.CurrentPage = "captured"
-
-	values.MainCharacter.Pokemons = append(values.MainCharacter.Pokemons, *values.EnemyBalade)
+	pokemonToAdd := values.FindPokemon(values.EnemyBalade.GetName())
+	pokemonToAdd.Vie = values.EnemyBalade.Vie
+	values.MainCharacter.Pokemons = append(values.MainCharacter.Pokemons, pokemonToAdd)
 	bdd.Database.AddPokemon(values.EnemyBalade.GetName())
 
 	utils.ClearTerminal()

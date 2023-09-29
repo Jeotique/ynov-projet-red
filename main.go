@@ -116,7 +116,7 @@ func ChoseUrName() {
 	input := utils.WaitForInput()
 	values.MainCharacter.Nom = input
 	values.MainCharacter.PokemonMax = 3
-	values.MainCharacter.Argent = 30
+	values.MainCharacter.Argent = 60
 	bdd.Database.Set("character_name", input)
 	bdd.Database.Set("character_pokemax", values.MainCharacter.PokemonMax)
 	bdd.Database.Set("character_argent", values.MainCharacter.Argent)
