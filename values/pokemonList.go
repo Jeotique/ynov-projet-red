@@ -2,12 +2,13 @@ package values
 
 var Pokemons []Pokemon = []Pokemon{
 	{
-		Nom:           "Bulbizarre",
-		Classe:        "Plante",
-		Description:   "Une plante puissante et résistante",
-		Vie:           60,
-		MaxVie:        60,
-		ChanceCapture: 40,
+		Nom:                  "Bulbizarre",
+		Classe:               "Plante",
+		Description:          "Une plante puissante et résistante",
+		Vie:                  60,
+		MaxVie:               60,
+		ChanceCapture:        40,
+		DefaultChanceCapture: 40,
 		Attaques: []Attaque{{
 			Nom:         "Fouetard",
 			Description: "Fouete l'adversaire avec une liane",
@@ -18,12 +19,13 @@ var Pokemons []Pokemon = []Pokemon{
 		}},
 	},
 	{
-		Nom:           "Salamèche",
-		Classe:        "Feu",
-		Description:   "Un Pokémon de feu fougueux et déterminé",
-		Vie:           60,
-		MaxVie:        60,
-		ChanceCapture: 40,
+		Nom:                  "Salamèche",
+		Classe:               "Feu",
+		Description:          "Un Pokémon de feu fougueux et déterminé",
+		Vie:                  60,
+		MaxVie:               60,
+		ChanceCapture:        40,
+		DefaultChanceCapture: 40,
 		Attaques: []Attaque{{
 			Nom:         "Boule de feu",
 			Description: "Envoie une boule de feu sur l'adversaire",
@@ -34,12 +36,13 @@ var Pokemons []Pokemon = []Pokemon{
 		}},
 	},
 	{
-		Nom:           "Carapuce",
-		Classe:        "Eau",
-		Description:   "Un Pokémon d'eau calme et réfléchi",
-		Vie:           60,
-		MaxVie:        60,
-		ChanceCapture: 40,
+		Nom:                  "Carapuce",
+		Classe:               "Eau",
+		Description:          "Un Pokémon d'eau calme et réfléchi",
+		Vie:                  60,
+		MaxVie:               60,
+		ChanceCapture:        40,
+		DefaultChanceCapture: 40,
 		Attaques: []Attaque{{
 			Nom:         "Jet d'eau",
 			Description: "Arrose d'un jet puissant l'adversaire",
@@ -50,12 +53,13 @@ var Pokemons []Pokemon = []Pokemon{
 		}},
 	},
 	{
-		Nom:           "Pikachu",
-		Classe:        "Électrique",
-		Description:   "Un Pokémon électrique mignon mais puissant",
-		Vie:           55,
-		MaxVie:        55,
-		ChanceCapture: 30,
+		Nom:                  "Pikachu",
+		Classe:               "Électrique",
+		Description:          "Un Pokémon électrique mignon mais puissant",
+		Vie:                  55,
+		MaxVie:               55,
+		ChanceCapture:        30,
+		DefaultChanceCapture: 30,
 		Attaques: []Attaque{
 			{
 				Nom:         "Éclair",
@@ -84,12 +88,13 @@ var Pokemons []Pokemon = []Pokemon{
 		},
 	},
 	{
-		Nom:           "Rondoudou",
-		Classe:        "Normal",
-		Description:   "Un Pokémon rond et mignon qui aime chanter",
-		Vie:           80,
-		MaxVie:        80,
-		ChanceCapture: 40,
+		Nom:                  "Rondoudou",
+		Classe:               "Normal",
+		Description:          "Un Pokémon rond et mignon qui aime chanter",
+		Vie:                  80,
+		MaxVie:               80,
+		ChanceCapture:        40,
+		DefaultChanceCapture: 40,
 		Attaques: []Attaque{
 			{
 				Nom:         "Mélodie",
@@ -118,12 +123,13 @@ var Pokemons []Pokemon = []Pokemon{
 		},
 	},
 	{
-		Nom:           "Dracaufeu",
-		Classe:        "Feu",
-		Description:   "Un dragon de feu impressionnant",
-		Vie:           80,
-		MaxVie:        80,
-		ChanceCapture: 10,
+		Nom:                  "Dracaufeu",
+		Classe:               "Feu",
+		Description:          "Un dragon de feu impressionnant",
+		Vie:                  80,
+		MaxVie:               80,
+		ChanceCapture:        10,
+		DefaultChanceCapture: 10,
 		Attaques: []Attaque{
 			{
 				Nom:         "Déflagration",
@@ -152,12 +158,13 @@ var Pokemons []Pokemon = []Pokemon{
 		},
 	},
 	{
-		Nom:           "Léviator",
-		Classe:        "Eau",
-		Description:   "Un puissant Pokémon eau avec une peau dure",
-		Vie:           90,
-		MaxVie:        90,
-		ChanceCapture: 5,
+		Nom:                  "Léviator",
+		Classe:               "Eau",
+		Description:          "Un puissant Pokémon eau avec une peau dure",
+		Vie:                  90,
+		MaxVie:               90,
+		ChanceCapture:        5,
+		DefaultChanceCapture: 5,
 		Attaques: []Attaque{
 			{
 				Nom:         "Hydrocanon",
@@ -220,12 +227,13 @@ var Pokemons []Pokemon = []Pokemon{
 		},
 	},*/
 	{
-		Nom:           "Gyrados",
-		Classe:        "Eau",
-		Description:   "Un Pokémon eau féroce et redoutable",
-		Vie:           85,
-		MaxVie:        85,
-		ChanceCapture: 15,
+		Nom:                  "Gyrados",
+		Classe:               "Eau",
+		Description:          "Un Pokémon eau féroce et redoutable",
+		Vie:                  85,
+		MaxVie:               85,
+		ChanceCapture:        15,
+		DefaultChanceCapture: 15,
 		Attaques: []Attaque{
 			{
 				Nom:         "Ouragan",
@@ -254,12 +262,13 @@ var Pokemons []Pokemon = []Pokemon{
 		},
 	},
 	{
-		Nom:           "Mewtwo",
-		Classe:        "Psychique",
-		Description:   "Un Pokémon psychique légendaire avec un pouvoir mental immense",
-		Vie:           100,
-		MaxVie:        100,
-		ChanceCapture: 2,
+		Nom:                  "Mewtwo",
+		Classe:               "Psychique",
+		Description:          "Un Pokémon psychique légendaire avec un pouvoir mental immense",
+		Vie:                  100,
+		MaxVie:               100,
+		ChanceCapture:        2,
+		DefaultChanceCapture: 2,
 		Attaques: []Attaque{
 			{
 				Nom:         "Psycho Explosion",
@@ -288,12 +297,13 @@ var Pokemons []Pokemon = []Pokemon{
 		},
 	},
 	{
-		Nom:           "Ronflex",
-		Classe:        "Normal",
-		Description:   "Un Pokémon paresseux mais incroyablement résistant",
-		Vie:           120,
-		MaxVie:        120,
-		ChanceCapture: 5,
+		Nom:                  "Ronflex",
+		Classe:               "Normal",
+		Description:          "Un Pokémon paresseux mais incroyablement résistant",
+		Vie:                  120,
+		MaxVie:               120,
+		ChanceCapture:        5,
+		DefaultChanceCapture: 5,
 		Attaques: []Attaque{
 			{
 				Nom:         "Écrasement",

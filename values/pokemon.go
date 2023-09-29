@@ -3,13 +3,14 @@ package values
 import "game/utils"
 
 type Pokemon struct {
-	Nom           string    `json:"Nom"`
-	Classe        string    `json:"Classe"`
-	Description   string    `json:"Description"`
-	Vie           int       `json:"Vie"`
-	MaxVie        int       `json:"MaxVie"`
-	ChanceCapture int       `json:"ChanceCapture"`
-	Attaques      []Attaque `json:"Attaques"`
+	Nom                  string    `json:"Nom"`
+	Classe               string    `json:"Classe"`
+	Description          string    `json:"Description"`
+	Vie                  int       `json:"Vie"`
+	MaxVie               int       `json:"MaxVie"`
+	ChanceCapture        int       `json:"ChanceCapture"`
+	DefaultChanceCapture int       `json:"DefaultChanceCapture"`
+	Attaques             []Attaque `json:"Attaques"`
 }
 
 type Attaque struct {
