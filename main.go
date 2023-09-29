@@ -233,12 +233,12 @@ func StartListening() {
 			}
 			funcType()
 			if values.CurrentPage != "in_battle" && values.CurrentPage != "in_battle_arene" {
-				go utils.PlaySound(values.Sounds["navigate"])
+				utils.PlaySound(values.Sounds["navigate"], 3)
 			}
 		} else {
 			if r == 13 { // 13 = touche entrée
 				if values.CurrentPage != "in_battle" && values.CurrentPage != "in_battle_arene" {
-					go utils.PlaySound(values.Sounds["click"])
+					utils.PlaySound(values.Sounds["click"], 3)
 				}
 				switch values.CurrentPage {
 				case "menu":
