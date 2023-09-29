@@ -88,7 +88,10 @@ func WaitForInput() string {
 }
 
 func RandomNumber(min int, max int) int {
-	return rand.Intn((max - min + 1) + min)
+	/*rand.Seed(time.Now().UnixNano())
+	return rand.Intn((max - min + 1) + min)*/
+	rand.Seed(time.Now().UnixNano())
+	return rand.Intn((max - min + 1)) + min
 }
 
 func WaitForNumberInput() (bool, int) {

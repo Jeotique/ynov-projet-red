@@ -221,6 +221,7 @@ func AreneWinner() {
 func AreneLoser() {
 	values.MenuIndex = 1
 	values.CurrentPage = "loser"
+	values.PokemonBalade.Vie = values.PokemonBalade.MaxVie / 2
 	bdd.Database.SavePokemons(values.MainCharacter.Pokemons)
 	values.EnemyBalade.Vie = values.EnemyBalade.MaxVie
 	utils.ClearTerminal()

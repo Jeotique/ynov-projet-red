@@ -25,7 +25,7 @@ func LookForEnemy() {
 	s.FinalMSG = "Game loaded !\n"
 	s.Color("bold")
 	s.Start()
-	time.Sleep(14000 * time.Millisecond)
+	time.Sleep(6000 * time.Millisecond)
 	fmt.Println()
 	s.Stop()
 	values.EnemyBalade = &values.Pokemons[utils.RandomNumber(0, len(values.Pokemons)-1)]
@@ -197,7 +197,7 @@ func BattleBalade() {
 		}
 	} else {
 		utils.Writeanim("Vous tentez de capturer "+values.EnemyBalade.Nom+" !\n", 10)
-		utils.Writeanim("Pokeball jeter !\n", 10)
+		utils.Writeanim("Pokeball jeté !\n", 10)
 		time.Sleep(1500 * time.Millisecond)
 		utils.Writeanim("Hmm...\n", 10)
 		time.Sleep(1500 * time.Millisecond)

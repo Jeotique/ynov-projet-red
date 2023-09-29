@@ -265,8 +265,8 @@ var Pokemons []Pokemon = []Pokemon{
 		Nom:                  "Mewtwo",
 		Classe:               "Psychique",
 		Description:          "Un Pokémon psychique légendaire avec un pouvoir mental immense",
-		Vie:                  100,
-		MaxVie:               100,
+		Vie:                  140,
+		MaxVie:               140,
 		ChanceCapture:        2,
 		DefaultChanceCapture: 2,
 		Attaques: []Attaque{
