@@ -32,12 +32,16 @@ func BattleArene() {
 	data := [][]string{
 		[]string{values.PokeArt[values.PokemonBalade.Nom], values.PokeArt[values.EnemyBalade.Nom]},
 		[]string{"\n\n", "\n\n"},
-		[]string{"Vie : " + strconv.Itoa(values.PokemonBalade.Vie) + "/" + strconv.Itoa(values.PokemonBalade.MaxVie), "Vie : " + strconv.Itoa(values.EnemyBalade.Vie) + "/" + strconv.Itoa(values.EnemyBalade.MaxVie)},
+		//[]string{"Vie : " + strconv.Itoa(values.PokemonBalade.Vie) + "/" + strconv.Itoa(values.PokemonBalade.MaxVie), "Vie : " + strconv.Itoa(values.EnemyBalade.Vie) + "/" + strconv.Itoa(values.EnemyBalade.MaxVie)},
 	}
 	table := tablewriter.NewWriter(os.Stdout)
+	table.SetAutoWrapText(false)
 	for _, v := range data {
 		table.Append(v)
 	}
+	table.SetFooter([]string{"Type : " + values.PokemonBalade.Classe + "\nVie : " + strconv.Itoa(values.PokemonBalade.Vie) + "/" + strconv.Itoa(values.PokemonBalade.MaxVie),
+		"Type : " + values.EnemyBalade.Classe + "\nVie : " + strconv.Itoa(values.EnemyBalade.Vie) + "/" + strconv.Itoa(values.EnemyBalade.MaxVie),
+	})
 	table.Render()
 
 	if values.PlayerTour {

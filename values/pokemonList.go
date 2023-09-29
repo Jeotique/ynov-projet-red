@@ -331,7 +331,7 @@ var Pokemons []Pokemon = []Pokemon{
 			},
 		},
 	},
-	/*{
+	{
 		Nom:                  "Roucool",
 		Classe:               "Vol",
 		Description:          "Un petit oiseau Pokémon",
@@ -668,7 +668,7 @@ var Pokemons []Pokemon = []Pokemon{
 			},
 		},
 	},
-	/*	{
+	{
 		Nom:                  "Tentacruel",
 		Classe:               "Eau",
 		Description:          "Un Pokémon méduse de l'eau venimeuse",
@@ -756,5 +756,5 @@ var Pokemons []Pokemon = []Pokemon{
 				PrixVie:     0,
 			},
 		},
-	},*/
+	},
 }

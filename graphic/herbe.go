@@ -36,7 +36,7 @@ func LookForEnemy() {
 func AnnounceBattle() {
 	go utils.PlaySound(values.Sounds["battle"])
 	utils.ClearTerminal()
-	utils.Writeanim(values.PokeArt[values.EnemyBalade.GetName()], 1)
+	utils.Writeanim(values.PokeArt[values.EnemyBalade.GetName()], 0)
 	fmt.Println()
 	fmt.Println()
 	utils.Writeanim("Un "+values.EnemyBalade.GetName()+" vient d'apparaître !", 10)
@@ -53,13 +53,15 @@ func BattleBalade() {
 	data := [][]string{
 		[]string{values.PokeArt[values.PokemonBalade.Nom], values.PokeArt[values.EnemyBalade.Nom]},
 		[]string{"\n\n", "\n\n"},
-		[]string{"Vie : " + strconv.Itoa(values.PokemonBalade.Vie) + "/" + strconv.Itoa(values.PokemonBalade.MaxVie), "Vie : " + strconv.Itoa(values.EnemyBalade.Vie) + "/" + strconv.Itoa(values.EnemyBalade.MaxVie)},
-		[]string{"", "Chance de capture : " + strconv.Itoa(values.EnemyBalade.ChanceCapture) + "%"},
 	}
 	table := tablewriter.NewWriter(os.Stdout)
+	table.SetAutoWrapText(false)
 	for _, v := range data {
 		table.Append(v)
 	}
+	table.SetFooter([]string{"Type : " + values.PokemonBalade.Classe + "\nVie : " + strconv.Itoa(values.PokemonBalade.Vie) + "/" + strconv.Itoa(values.PokemonBalade.MaxVie),
+		"Type : " + values.EnemyBalade.Classe + "\nVie : " + strconv.Itoa(values.EnemyBalade.Vie) + "/" + strconv.Itoa(values.EnemyBalade.MaxVie) + "\nChance de capture : " + strconv.Itoa(values.EnemyBalade.ChanceCapture) + "%",
+	})
 	table.Render()
 
 	if !values.TryingCapture {
