@@ -185,7 +185,7 @@ var Pokemons []Pokemon = []Pokemon{
 			},
 		},
 	},
-	{
+	/*{
 		Nom:           "Goupix",
 		Classe:        "Feu",
 		Description:   "Un Pokémon renard de feu aux neuf queues",
@@ -218,7 +218,7 @@ var Pokemons []Pokemon = []Pokemon{
 				PrixVie:     -10,
 			},
 		},
-	},
+	},*/
 	{
 		Nom:           "Gyrados",
 		Classe:        "Eau",

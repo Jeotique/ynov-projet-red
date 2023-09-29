@@ -331,6 +331,7 @@ func BaladeWinner() {
 	values.MenuIndex = 1
 	values.CurrentPage = "winner"
 	bdd.Database.SavePokemons(values.MainCharacter.Pokemons)
+	values.EnemyBalade.Vie = values.EnemyBalade.MaxVie
 	xpWin := utils.RandomNumber(10, 25)
 	values.MainCharacter.AddXp(xpWin)
 	bdd.Database.Set("character_xp", values.MainCharacter.Xp)
@@ -359,6 +360,7 @@ func BaladeLoser() {
 	values.CurrentPage = "loser"
 	values.PokemonBalade.Vie = values.PokemonBalade.MaxVie / 2
 	bdd.Database.SavePokemons(values.MainCharacter.Pokemons)
+	values.EnemyBalade.Vie = values.EnemyBalade.MaxVie
 
 	utils.ClearTerminal()
 	fmt.Println()

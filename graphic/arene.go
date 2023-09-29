@@ -193,6 +193,7 @@ func AreneWinner() {
 	bdd.Database.SavePokemons(values.MainCharacter.Pokemons)
 	values.MainCharacter.Badges = append(values.MainCharacter.Badges, values.MaitrePlaying.Badge)
 	bdd.Database.SaveBadges(values.MainCharacter.Badges)
+	values.EnemyBalade.Vie = values.EnemyBalade.MaxVie
 	xpWin := utils.RandomNumber(10, 25)
 	values.MainCharacter.AddXp(xpWin)
 	values.MainCharacter.AddLevel(utils.RandomNumber(3, 8))
@@ -221,7 +222,7 @@ func AreneLoser() {
 	values.MenuIndex = 1
 	values.CurrentPage = "loser"
 	bdd.Database.SavePokemons(values.MainCharacter.Pokemons)
-
+	values.EnemyBalade.Vie = values.EnemyBalade.MaxVie
 	utils.ClearTerminal()
 	fmt.Println()
 	fmt.Println()
